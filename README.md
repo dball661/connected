@@ -5,6 +5,8 @@ This app is built using the AWS CDK to generate & deploy the AWS Lambda & AWS Dy
 
 
 #Install Libraries
+in the main directory run
 ```bash
-in the main directory run npm run install to install all the dependencies for the cdk as well as the lambda runtime
+ npm run install
 ```
+to install all the dependencies for the cdk as well as the lambda runtime
