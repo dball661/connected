@@ -1,0 +1,185 @@
+{
+  "modules": [
+    {
+      "id": "757bbc83-3118-4fcf-b07f-732495662614",
+      "type": "Disconnect",
+      "branches": [],
+      "parameters": [],
+      "metadata": {
+        "position": {
+          "x": 959,
+          "y": 547
+        }
+      }
+    },
+    {
+      "id": "5f0eb318-b387-499d-a7f2-8a435022263d",
+      "type": "PlayPrompt",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "d8d65f32-a1c5-4aee-88be-9fcfb98a1b39"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Now generating your vanity numbers",
+          "namespace": null
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 191,
+          "y": 35
+        },
+        "useDynamic": false
+      }
+    },
+    {
+      "id": "a6d57d4a-7def-42fc-ab25-1c4f6e639cda",
+      "type": "PlayPrompt",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "757bbc83-3118-4fcf-b07f-732495662614"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Your vanity numbers are as follows.\nNumber 1: $.External.number0 ,,,\nNumber 2: $.External.number1 ,,,\nNumber 3: $.External.number2 ,,,",
+          "namespace": null
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 919,
+          "y": 231
+        },
+        "useDynamic": false
+      }
+    },
+    {
+      "id": "afa78f34-ede9-45b8-adc5-974dc7d456ff",
+      "type": "PlayPrompt",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "757bbc83-3118-4fcf-b07f-732495662614"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Failed",
+          "namespace": null
+        },
+        {
+          "name": "TextToSpeechType",
+          "value": "text"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 708,
+          "y": 466
+        },
+        "useDynamic": false
+      }
+    },
+    {
+      "id": "d8d65f32-a1c5-4aee-88be-9fcfb98a1b39",
+      "type": "InvokeExternalResource",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "001c4271-fdbc-4c4a-8331-6b5f57ed2f39"
+        },
+        {
+          "condition": "Error",
+          "transition": "afa78f34-ede9-45b8-adc5-974dc7d456ff"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "FunctionArn",
+          "value": "arn:aws:lambda:us-east-1:449608137638:function:CdkStack-connectedD32817F2-xFx8BHWYUeTW",
+          "namespace": null
+        },
+        {
+          "name": "TimeLimit",
+          "value": "8"
+        },
+        {
+          "name": "Parameter",
+          "key": "customerNumber",
+          "value": "Customer Number",
+          "namespace": "System"
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 410,
+          "y": 199
+        },
+        "dynamicMetadata": {
+          "customerNumber": true
+        },
+        "useDynamic": false
+      },
+      "target": "Lambda"
+    },
+    {
+      "id": "001c4271-fdbc-4c4a-8331-6b5f57ed2f39",
+      "type": "SetAttributes",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "a6d57d4a-7def-42fc-ab25-1c4f6e639cda"
+        },
+        {
+          "condition": "Error",
+          "transition": "afa78f34-ede9-45b8-adc5-974dc7d456ff"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Attribute",
+          "value": "$.External.customerNumber",
+          "key": "customerNumber",
+          "namespace": null
+        }
+      ],
+      "metadata": {
+        "position": {
+          "x": 693,
+          "y": 181
+        }
+      }
+    }
+  ],
+  "version": "1",
+  "start": "5f0eb318-b387-499d-a7f2-8a435022263d",
+  "metadata": {
+    "entryPointPosition": {
+      "x": 20,
+      "y": 15
+    },
+    "snapToGrid": false,
+    "name": "test",
+    "description": null,
+    "type": "contactFlow",
+    "status": "published",
+    "hash": "c2dfab5e51e3ed22428e4942c779e02744454826235cf0434981806aea3d09a4"
+  },
+  "type": "contactFlow"
+}
