@@ -12,28 +12,18 @@ export const lambdaHandler = async (
   context: Context,
   callback: ConnectContactFlowCallback
 ): Promise<ConnectContactFlowResult> => {
-  console.log("event ", event);
-  //console.log("wordlist ", wordlist.length);
-
   AWS.config.update({ region: process.env.region });
   const dynamoClient = new AWS.DynamoDB.DocumentClient();
 
   try {
     var { customerNumber } = event.Details.Parameters; // grab the customerNumber attribute passed through from the contact flow
-    // const words = wordlist.filter(
-    //   (item) => item.length === customerNumber.length
-    // );
     const validNumber = validateNumber(customerNumber); // use some Regex magic to ensure that it is a valid 10 digit number sans country code
-
-    console.log("processed Number ", validNumber);
 
     const vanityList = await generateVanityNumbers(
       validNumber,
       dynamoClient,
       words
     );
-
-    console.log("vanityList ", vanityList);
 
     const result: ConnectContactFlowResult = {};
 
@@ -165,8 +155,6 @@ const checkNumber = async (
   };
 
   const result = await dynamoClient.get(params).promise();
-
-  console.log("result ", result);
 
   try {
     console.log("Found vanity numbers in db: " + result.Item["vanity_numbers"]);
