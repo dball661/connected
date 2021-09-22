@@ -47,6 +47,14 @@ run the following command to deploy your stack to your AWS account
  npm run cdk-deploy
 ```
 
+# Destroy
+
+run the following command to destroy all resources associated with the cdk stack
+
+```bash
+ cdk destroy
+```
+
 Once this has been run in your command line there will be an Output section, with CdkStack.Output as one of the outputs. This is the ARN of the lambda function you created. to add this to your existing AWS Connect instace, log into it and click on contact flows option on the left. Under the AWS labda sub-header select the ARN from the output and select Add Lambda Function. There is a file called flow in the main CDK dir, in here you will need to replace line 115's value key with the ARN that was output from the CDK deploy command, in the same way as above to add that function to your instance. Then you will log into your actual instance, and select Contact Flows under the routing dropdown. Click create new flow, then under the dropdown next to the save button click import flow. Once you save and publish this flow, you should be able to add it as the default contact flow for one of the phone numbers under the phone number subheading in the routing dropdown
 
 ## Architecture diagram
