@@ -10,7 +10,7 @@
     "test": "jest",
     "dependencies": "npm install && cd lambda && npm install && cd built && npm install",
     "cdk-synth": "cd lambda && npm run compile && cd ../ && cdk diff && cdk synth",
-    "cdk-deploy": "cd lambda && npm run compile && cd ../ && cdk deploy --profile test"
+    "cdk-deploy": "cd lambda && npm run compile && cd ../ && cdk deploy"
   },
   "devDependencies": {
     "aws-cdk": "1.122.0",
